@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from "react";
+import { createPortal } from "react-dom";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // THEME  bg: #0a0a0c  panel: #111114  card: #16161a  border: #1e1e26
@@ -85,7 +86,7 @@ const MEDIA = [
   { src: "/Portfolio/images/Scene.jpg", label: "DMC 3 SCENE 1 REMAKE" },
 ];
 
-const CATS = ["ALL", "Multiplayer", "Open World", "Strategy", "Tool", "Puzzle", "Horror"];
+const CATS = ["ALL", "Multiplayer", "Hack & Slash", "Third Person", "VR", "Cinematic"];
 
 // ── HOOKS ────────────────────────────────────────────────────────────────────
 function useInView(threshold = 0.12) {
@@ -436,9 +437,9 @@ function YoutubeModal({ videoId, accent, onClose }) {
     return () => window.removeEventListener("keydown", fn);
   }, [onClose]);
 
-  return (
+  return createPortal(
     <div onClick={onClose} style={{
-      position: "fixed", inset: 0, zIndex: 400,
+      position: "fixed", inset: 0, zIndex: 9999,
       background: "rgba(0,0,0,0.92)", backdropFilter: "blur(8px)",
       display: "flex", alignItems: "center", justifyContent: "center",
       cursor: "pointer",
@@ -463,7 +464,8 @@ function YoutubeModal({ videoId, accent, onClose }) {
           boxShadow: `0 0 16px ${accent}`,
         }}>✕</button>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
