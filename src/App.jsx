@@ -444,7 +444,7 @@ function YoutubeModal({ videoId, accent, onClose }) {
       cursor: "pointer",
     }}>
       <div onClick={e => e.stopPropagation()} style={{
-        position: "relative", width: "min(88vw, 960px)", aspectRatio: "16/9",
+        position: "relative", width: "92vw", height: "88vh",
         border: `1px solid ${accent}60`,
         boxShadow: `0 0 60px ${accent}40`,
       }}>
