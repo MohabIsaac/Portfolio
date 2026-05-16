@@ -22,46 +22,46 @@ const C = {
 // ── DATA ─────────────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
-    id: 1, title: "VOID PROTOCOL", category: "Multiplayer", year: "2024",
-    desc: "5v5 tactical extraction shooter — Unreal Engine 5 with sub-50ms dedicated server netcode, custom GAS, and full anti-cheat pipeline.",
-    stack: ["UE5", "C++", "Dedicated Servers", "GAS"], accent: "#ff3d5a",
+    id: 1, title: "JUJUTSU KAISEN TOP-DOWN FIGHTER", category: "Multiplayer", year: "2026",
+    desc: "Mutlipayer Top-Down Fighter with focus on responsive Combat mechanics, fast-paced gameplay and fluid movement.",
+    stack: ["UE5", "C++", "Listen Server"], accent: "#ff3d5a",
     img: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=900&q=80",
-    links: { github: "#", youtube: "#", steam: "#" },
+    links: { github: "#", youtube: "https://www.youtube.com/watch?v=aYnFqYDNW9g", steam: "#" },
   },
   {
-    id: 2, title: "REMNANT SKIES", category: "Open World", year: "2023",
-    desc: "Survival RPG with procedurally generated ecosystems, volumetric weather, and a 200km² open world built using runtime virtual texturing.",
-    stack: ["UE5", "C++", "Blueprints", "Procedural Gen"], accent: "#00e5ff",
+    id: 2, title: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL", category: "Hack & Slash", year: "2026",
+    desc: "A fast-paced 3D hack-and-slash built in Unity. This project features fluid character movement, responsive combat mechanics, and a level design inspired by the gothic atmosphere and exploration-driven gameplay of the original title.",
+    stack: ["Unity", "C#", "ProBuilder"], accent: "#00e5ff",
     img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=900&q=80",
     links: { github: "#", youtube: "#" },
   },
   {
-    id: 3, title: "IRON MERIDIAN", category: "Strategy", year: "2022",
-    desc: "Asynchronous turn-based strategy with a custom ML adversary trained on 80k+ matches. Deep faction mechanics and global leaderboards.",
-    stack: ["Unity", "C#", "ML Agents", "Photon"], accent: "#d926f0",
+    id: 3, title: "BLANK AGAIN VR", category: "VR", year: "2026",
+    desc: "Mystery/Puzzle solving VR game made in Unreal Engine 5 for the Egypt Game Jam(1-Week). The game features interactable props, physics-based puzzles, key-door mechanics, and a suspenseful atmosphere.",
+    stack: ["Unreal Engine 5", "C++"], accent: "#d926f0",
     img: "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?w=900&q=80",
-    links: { github: "#", steam: "#" },
+    links: { github: "#", youtube: "https://www.youtube.com/watch?v=iqTLwZZMAKI" },
   },
   {
-    id: 4, title: "FORGE ENGINE", category: "Tool", year: "2024",
-    desc: "Open-source level-design toolkit for UE5. Procedural asset scattering, spline roads, biome painter, and custom Slate UI panels.",
-    stack: ["UE5", "C++", "Slate UI", "Editor Tools"], accent: "#7c3aed",
+    id: 4, title: "TANKS TANKS TANKS", category: "Multiplayer", year: "2026",
+    desc: "A fast paced multiplayer game made in Unity, where players control tanks and battle each other in 2 opposing teams. The game features rigidbody movement for a weighed feel, fluid animations and impactful VFX, class and ability systems",
+    stack: ["Unity", "C#", "Netcode"], accent: "#7c3aed",
     img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
     links: { github: "#" },
   },
   {
-    id: 5, title: "GRIDLOCK", category: "Puzzle", year: "2023",
-    desc: "Minimalist puzzle mechanics exploring emergent spatial complexity. Itch.io Editor's Pick two weeks running. 40k plays.",
-    stack: ["Unity", "C#", "Shader Graph"], accent: "#00e5ff",
+    id: 5, title: "UE5 THIRD PERSON SHOOTER", category: "Third Person", year: "2026",
+    desc: "Third Person Shooter base made in Unreal Engine 5, featuring a locomotion system with 3 states(unarmed, pistol, rifle), a firing system, a health and consumables system, an interaction system and enemy AI turrets",
+    stack: ["Unreal Engine 5", "C++"], accent: "#00e5ff",
     img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=900&q=80",
-    links: { github: "#", demo: "#" },
+    links: { github: "#", youtube: "https://www.youtube.com/watch?v=bRkA1bfu5pU" },
   },
   {
-    id: 6, title: "DEPTH SEEKER", category: "Horror", year: "2024",
-    desc: "Experimental underwater horror prototype. Procedural cave gen, volumetric caustics, reactive FMOD audio design.",
-    stack: ["Unity", "C#", "FMOD", "Blender"], accent: "#ff3d5a",
+    id: 6, title: "DMC 3 SCENE 1 REMAKE", category: "Cinematic", year: "2025",
+    desc: "An attempt to remake the first scene from Devil May Cry 3 in Unreal Engine 5 to learn animation and sequencer basics.",
+    stack: ["Unreal Engine 5", "Sequencer", "Blender"], accent: "#ff3d5a",
     img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80",
-    links: { github: "#", youtube: "#" },
+    links: { github: "#", youtube: "https://www.youtube.com/watch?v=zaWelhRBzHM" },
   },
 ];
 
@@ -306,7 +306,7 @@ function Hero() {
           color: C.muted, lineHeight: 1.7, maxWidth: 540, marginBottom: 44,
           animation: "heroFade 0.9s 0.3s ease forwards", opacity: 0,
         }}>
-          I build the systems players feel — tight netcode, responsive controls, and deep mechanics. 6 years shipping games from prototype to live service.
+          I build responsive systems that feel good and are fun to play.<br />I'm always learning, always improving!
         </p>
 
         {/* CTAs */}
@@ -325,7 +325,7 @@ function Hero() {
           borderTop: `1px solid ${C.border}`,
           animation: "heroFade 0.9s 0.55s ease forwards", opacity: 0,
         }}>
-          {[["6+", "YRS EXP"], ["12", "SHIPPED"], ["4M+", "PLAYERS"], ["8", "AWARDS"]].map(([n, l]) => (
+          {[["3+", "YRS EXP"], ["Unreal/Unity", "ENGINES"], ["C++ and C#", "LANGUAGES"]].map(([n, l]) => (
             <div key={l}>
               <div style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700, fontSize: "clamp(22px, 4vw, 36px)", color: C.red, lineHeight: 1 }}>{n}</div>
               <div style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 10, letterSpacing: "0.18em", color: C.muted, marginTop: 4 }}>{l}</div>
@@ -547,11 +547,11 @@ function Profile() {
               borderLeft: `3px solid ${C.red}`,
             }}>
               <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 16, color: C.muted, lineHeight: 1.8, margin: 0 }}>
-                I'm a gameplay and systems engineer with 6 years building commercial titles across UE5 and Unity. My work spans tight multiplayer shooters, massive open worlds, and experimental indie prototypes.
+                I'm a gameplay and systems developer proficient in both UE5 and Unity, skilled in crafting various experiences. My work ranges from rapid prototyping to developing full-featured titles that prioritize engaging gameplay.
               </p>
             </div>
             <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 15, color: C.muted, lineHeight: 1.8, marginBottom: 28 }}>
-              I obsess over the feel of systems — frame pacing, input latency, netcode prediction, and the 200ms interactions that players never consciously notice but always feel.
+              My goal is to make systems that actually feel good to experience and play in, no matter the platform or scale.
             </p>
 
             {/* Stat cards */}
@@ -579,10 +579,10 @@ function Profile() {
         <Reveal delay={0.15}>
           <div style={{ marginTop: 64 }}>
             {[
-              { year: "2024", role: "Sr. Game Developer", co: "Freelance", note: "Shipped 2 titles + 3 OSS tools" },
-              { year: "2022", role: "Lead Gameplay Programmer", co: "Nexus Interactive", note: "Team of 6 · 2yr multiplayer title" },
-              { year: "2020", role: "Gameplay Engineer", co: "Orbital Softworks", note: "Combat, GAS integration, player controller" },
-              { year: "2018", role: "Junior Developer", co: "Pixel Forge Studios", note: "First shipped title · 200k downloads" },
+              { year: "2025-2026", role: "Game Programming Trainee", co: "Information Technology Institute", note: "Studied game programming for 9-months at ITI" },
+              { year: "2024-2025", role: "Retoucher", co: "TechJump", note: "Worked as an image retoucher using Photoshop" },
+              { year: "2023-2024", role: "Soldier", co: "Egyptian Military", note: "Served in the Egyptian Military" },
+              { year: "2019-2023", role: "IT Student", co: "EELU", note: "Studied Information Technology" },
             ].map((t, i) => (
               <div key={i} style={{ display: "flex", gap: 20, marginBottom: i < 3 ? 28 : 0 }}>
                 <div style={{ display: "flex", flexDirection: "column", alignItems: "center", width: 14 }}>
