@@ -412,9 +412,9 @@ function Projects() {
         </div>
       </Reveal>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 18 }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(340px, 1fr))", gap: 18, alignItems: "stretch" }}>
         {filtered.map((p, i) => (
-          <Reveal key={p.id} delay={i * 0.06}>
+          <Reveal key={p.id} delay={i * 0.06} style={{ height: "100%" }}>
             <ProjectCard p={p} />
           </Reveal>
         ))}
@@ -423,103 +423,174 @@ function Projects() {
   );
 }
 
-function ProjectCard({ p }) {
-  const [hov, setHov] = useState(false);
-  const linkMap = { github: GithubIcon, youtube: YoutubeIcon, steam: SteamIcon, demo: () => <span style={{ fontSize: 12 }}>▶</span> };
-  const linkLabel = { github: "GitHub", youtube: "YouTube", steam: "Steam", demo: "Demo" };
+function getYoutubeId(url) {
+  if (!url || url === "#") return null;
+  const m = url.match(/(?:v=|youtu\.be\/)([A-Za-z0-9_-]{11})/);
+  return m ? m[1] : null;
+}
+
+function YoutubeModal({ videoId, accent, onClose }) {
+  useEffect(() => {
+    const fn = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", fn);
+    return () => window.removeEventListener("keydown", fn);
+  }, [onClose]);
 
   return (
-    <div
-      onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
-      style={{
-        background: C.card,
-        border: `1px solid ${hov ? p.accent + "80" : C.border}`,
-        boxShadow: hov ? `0 0 28px ${p.accent}30, inset 0 0 20px ${p.accent}06` : "none",
-        transition: "all 0.3s",
-        transform: hov ? "translateY(-4px)" : "none",
-        overflow: "hidden",
-      }}
-    >
-      {/* Thumbnail */}
-      <div style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden" }}>
-        <img src={p.img} alt={p.title} style={{
-          width: "100%", height: "100%", objectFit: "cover",
-          filter: hov ? "brightness(0.95) saturate(1.1)" : "brightness(0.6) saturate(0.8)",
-          transform: hov ? "scale(1.05)" : "scale(1)",
-          transition: "all 0.4s",
-        }} />
-        {/* Accent overlay */}
-        <div style={{
-          position: "absolute", inset: 0,
-          background: hov ? `linear-gradient(135deg, ${p.accent}18, transparent 60%)` : "transparent",
-          transition: "background 0.3s",
-        }} />
-        {/* Corner accent */}
-        <div style={{
-          position: "absolute", top: 0, left: 0,
-          width: 3, height: hov ? "100%" : "40%",
-          background: p.accent,
-          boxShadow: `0 0 12px ${p.accent}`,
-          transition: "height 0.4s",
-        }} />
-        <div style={{
-          position: "absolute", top: 0, left: 0,
-          width: hov ? "100%" : "40%", height: 3,
-          background: p.accent,
-          boxShadow: `0 0 12px ${p.accent}`,
-          transition: "width 0.4s",
-        }} />
-
-        <div style={{
-          position: "absolute", top: 12, right: 12,
-          fontFamily: "'Rajdhani', sans-serif", fontSize: 10, letterSpacing: "0.16em",
-          color: p.accent, background: `${C.bg}cc`, border: `1px solid ${p.accent}60`,
-          padding: "3px 10px",
-          clipPath: "polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%)",
-        }}>{p.category.toUpperCase()}</div>
-      </div>
-
-      {/* Body */}
-      <div style={{ padding: "20px 20px 18px" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
-          <h3 style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700, fontSize: 20, color: C.text, margin: 0, letterSpacing: "0.06em" }}>{p.title}</h3>
-          <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 11, color: C.muted }}>{p.year}</span>
-        </div>
-        <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 14, color: C.muted, lineHeight: 1.65, margin: "0 0 14px" }}>{p.desc}</p>
-
-        {/* Stack tags */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
-          {p.stack.map(s => (
-            <span key={s} style={{
-              fontFamily: "'Rajdhani', sans-serif", fontSize: 10, letterSpacing: "0.14em",
-              color: p.accent, background: `${p.accent}12`,
-              border: `1px solid ${p.accent}30`,
-              padding: "2px 9px",
-            }}>{s}</span>
-          ))}
-        </div>
-
-        {/* Links */}
-        <div style={{ display: "flex", gap: 14, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
-          {Object.entries(p.links).filter(([, url]) => url !== "#").map(([type, url]) => {
-            const Icon = linkMap[type] || (() => null);
-            return (
-              <a key={type} href={url} target="_blank" rel="noopener noreferrer" style={{
-                display: "flex", alignItems: "center", gap: 6,
-                fontFamily: "'Rajdhani', sans-serif", fontSize: 11, letterSpacing: "0.1em",
-                color: C.muted, textDecoration: "none", transition: "color 0.2s",
-              }}
-                onMouseEnter={e => e.currentTarget.style.color = p.accent}
-                onMouseLeave={e => e.currentTarget.style.color = C.muted}
-              >
-                <Icon />{linkLabel[type].toUpperCase()}
-              </a>
-            );
-          })}
-        </div>
+    <div onClick={onClose} style={{
+      position: "fixed", inset: 0, zIndex: 400,
+      background: "rgba(0,0,0,0.92)", backdropFilter: "blur(8px)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      cursor: "pointer",
+    }}>
+      <div onClick={e => e.stopPropagation()} style={{
+        position: "relative", width: "min(88vw, 960px)", aspectRatio: "16/9",
+        border: `1px solid ${accent}60`,
+        boxShadow: `0 0 60px ${accent}40`,
+      }}>
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}?autoplay=1`}
+          allow="autoplay; encrypted-media"
+          allowFullScreen
+          style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+        />
+        <button onClick={onClose} style={{
+          position: "absolute", top: -14, right: -14,
+          width: 28, height: 28, borderRadius: "50%",
+          background: accent, border: "none", color: "#0a0a0c",
+          fontWeight: 700, fontSize: 14, cursor: "pointer",
+          display: "flex", alignItems: "center", justifyContent: "center",
+          boxShadow: `0 0 16px ${accent}`,
+        }}>✕</button>
       </div>
     </div>
+  );
+}
+
+function ProjectCard({ p }) {
+  const [hov, setHov] = useState(false);
+  const [ytOpen, setYtOpen] = useState(false);
+  const linkMap = { github: GithubIcon, youtube: YoutubeIcon, steam: SteamIcon, demo: () => <span style={{ fontSize: 12 }}>▶</span> };
+  const linkLabel = { github: "GitHub", youtube: "YouTube", steam: "Steam", demo: "Demo" };
+  const ytId = getYoutubeId(p.links.youtube);
+
+  return (
+    <>
+      {ytOpen && ytId && <YoutubeModal videoId={ytId} accent={p.accent} onClose={() => setYtOpen(false)} />}
+      <div
+        onMouseEnter={() => setHov(true)}
+        onMouseLeave={() => setHov(false)}
+        style={{
+          background: C.card,
+          border: `1px solid ${hov ? p.accent + "80" : C.border}`,
+          boxShadow: hov ? `0 0 28px ${p.accent}30, inset 0 0 20px ${p.accent}06` : "none",
+          transition: "all 0.3s",
+          transform: hov ? "translateY(-4px)" : "none",
+          overflow: "hidden",
+          display: "flex", flexDirection: "column", height: "100%",
+        }}
+      >
+        {/* Thumbnail */}
+        <div
+          onClick={() => ytId && setYtOpen(true)}
+          style={{ position: "relative", aspectRatio: "16/9", overflow: "hidden", cursor: ytId ? "pointer" : "default" }}
+        >
+          <img src={p.img} alt={p.title} style={{
+            width: "100%", height: "100%", objectFit: "cover",
+            filter: hov ? "brightness(0.95) saturate(1.1)" : "brightness(0.6) saturate(0.8)",
+            transform: hov ? "scale(1.05)" : "scale(1)",
+            transition: "all 0.4s",
+          }} />
+          {/* Accent overlay */}
+          <div style={{
+            position: "absolute", inset: 0,
+            background: hov ? `linear-gradient(135deg, ${p.accent}18, transparent 60%)` : "transparent",
+            transition: "background 0.3s",
+          }} />
+          {/* Corner accent */}
+          <div style={{
+            position: "absolute", top: 0, left: 0,
+            width: 3, height: hov ? "100%" : "40%",
+            background: p.accent, boxShadow: `0 0 12px ${p.accent}`,
+            transition: "height 0.4s",
+          }} />
+          <div style={{
+            position: "absolute", top: 0, left: 0,
+            width: hov ? "100%" : "40%", height: 3,
+            background: p.accent, boxShadow: `0 0 12px ${p.accent}`,
+            transition: "width 0.4s",
+          }} />
+          <div style={{
+            position: "absolute", top: 12, right: 12,
+            fontFamily: "'Rajdhani', sans-serif", fontSize: 10, letterSpacing: "0.16em",
+            color: p.accent, background: `${C.bg}cc`, border: `1px solid ${p.accent}60`,
+            padding: "3px 10px",
+            clipPath: "polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%)",
+          }}>{p.category.toUpperCase()}</div>
+
+          {/* Play button overlay — only if youtube link exists */}
+          {ytId && (
+            <div style={{
+              position: "absolute", inset: 0,
+              display: "flex", alignItems: "center", justifyContent: "center",
+              opacity: hov ? 1 : 0, transition: "opacity 0.3s",
+            }}>
+              <div style={{
+                width: 52, height: 52,
+                border: `2px solid ${p.accent}`,
+                boxShadow: `0 0 24px ${p.accent}80`,
+                display: "flex", alignItems: "center", justifyContent: "center",
+                background: `${p.accent}25`,
+              }}>
+                <span style={{ color: C.text, fontSize: 18, marginLeft: 4 }}>▶</span>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Body — flex grow so all cards stretch to same height */}
+        <div style={{ padding: "20px 20px 18px", display: "flex", flexDirection: "column", flex: 1 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 10 }}>
+            <h3 style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700, fontSize: 20, color: C.text, margin: 0, letterSpacing: "0.06em" }}>{p.title}</h3>
+            <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 11, color: C.muted }}>{p.year}</span>
+          </div>
+
+          {/* flex: 1 pushes stack + links to bottom */}
+          <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 14, color: C.muted, lineHeight: 1.65, margin: "0 0 14px", flex: 1 }}>{p.desc}</p>
+
+          {/* Stack tags */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 16 }}>
+            {p.stack.map(s => (
+              <span key={s} style={{
+                fontFamily: "'Rajdhani', sans-serif", fontSize: 10, letterSpacing: "0.14em",
+                color: p.accent, background: `${p.accent}12`,
+                border: `1px solid ${p.accent}30`,
+                padding: "2px 9px",
+              }}>{s}</span>
+            ))}
+          </div>
+
+          {/* Links */}
+          <div style={{ display: "flex", gap: 14, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
+            {Object.entries(p.links).filter(([, url]) => url !== "#").map(([type, url]) => {
+              const Icon = linkMap[type] || (() => null);
+              return (
+                <a key={type} href={url} target="_blank" rel="noopener noreferrer" style={{
+                  display: "flex", alignItems: "center", gap: 6,
+                  fontFamily: "'Rajdhani', sans-serif", fontSize: 11, letterSpacing: "0.1em",
+                  color: C.muted, textDecoration: "none", transition: "color 0.2s",
+                }}
+                  onMouseEnter={e => e.currentTarget.style.color = p.accent}
+                  onMouseLeave={e => e.currentTarget.style.color = C.muted}
+                >
+                  <Icon />{linkLabel[type].toUpperCase()}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
