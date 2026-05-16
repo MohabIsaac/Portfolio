@@ -25,42 +25,42 @@ const PROJECTS = [
     id: 1, title: "JUJUTSU KAISEN TOP-DOWN FIGHTER", category: "Multiplayer", year: "2026",
     desc: "Mutlipayer Top-Down Fighter with focus on responsive Combat mechanics, fast-paced gameplay and fluid movement.",
     stack: ["UE5", "C++", "Listen Server"], accent: "#ff3d5a",
-    img: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=900&q=80",
+    img: "src/assets/JJK.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=aYnFqYDNW9g", steam: "#" },
   },
   {
     id: 2, title: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL", category: "Hack & Slash", year: "2026",
     desc: "A fast-paced 3D hack-and-slash built in Unity. This project features fluid character movement, responsive combat mechanics, and a level design inspired by the gothic atmosphere and exploration-driven gameplay of the original title.",
     stack: ["Unity", "C#", "ProBuilder"], accent: "#00e5ff",
-    img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=900&q=80",
+    img: "src/assets/Castlevania.png",
     links: { github: "#", youtube: "#" },
   },
   {
     id: 3, title: "BLANK AGAIN VR", category: "VR", year: "2026",
     desc: "Mystery/Puzzle solving VR game made in Unreal Engine 5 for the Egypt Game Jam(1-Week). The game features interactable props, physics-based puzzles, key-door mechanics, and a suspenseful atmosphere.",
     stack: ["Unreal Engine 5", "C++"], accent: "#d926f0",
-    img: "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?w=900&q=80",
+    img: "src/assets/BlankAgain.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=iqTLwZZMAKI" },
   },
   {
     id: 4, title: "TANKS TANKS TANKS", category: "Multiplayer", year: "2026",
     desc: "A fast paced multiplayer game made in Unity, where players control tanks and battle each other in 2 opposing teams. The game features rigidbody movement for a weighed feel, fluid animations and impactful VFX, class and ability systems",
     stack: ["Unity", "C#", "Netcode"], accent: "#7c3aed",
-    img: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    img: "src/assets/Tanks.png",
     links: { github: "#" },
   },
   {
     id: 5, title: "UE5 THIRD PERSON SHOOTER", category: "Third Person", year: "2026",
     desc: "Third Person Shooter base made in Unreal Engine 5, featuring a locomotion system with 3 states(unarmed, pistol, rifle), a firing system, a health and consumables system, an interaction system and enemy AI turrets",
     stack: ["Unreal Engine 5", "C++"], accent: "#00e5ff",
-    img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=900&q=80",
+    img: "src/assets/UE5TPS.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=bRkA1bfu5pU" },
   },
   {
     id: 6, title: "DMC 3 SCENE 1 REMAKE", category: "Cinematic", year: "2025",
     desc: "An attempt to remake the first scene from Devil May Cry 3 in Unreal Engine 5 to learn animation and sequencer basics.",
     stack: ["Unreal Engine 5", "Sequencer", "Blender"], accent: "#ff3d5a",
-    img: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80",
+    img: "src/assets/Scene.jpg",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=zaWelhRBzHM" },
   },
 ];
@@ -77,12 +77,12 @@ const STACK = [
 ];
 
 const MEDIA = [
-  { src: "https://images.unsplash.com/photo-1593305841991-05c297ba4575?w=800&q=80", label: "VOID PROTOCOL — Gameplay" },
-  { src: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=800&q=80", label: "REMNANT SKIES — Open World" },
-  { src: "https://images.unsplash.com/photo-1580234811497-9df7fd2f357e?w=800&q=80", label: "IRON MERIDIAN — Strategy" },
-  { src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80", label: "FORGE ENGINE — Editor" },
-  { src: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=800&q=80", label: "GRIDLOCK — Puzzle" },
-  { src: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80", label: "DEPTH SEEKER — Horror" },
+  { src: "src/assets/JJK.png", label: "JUJUTSU KAISEN TOP-DOWN FIGHTER" },
+  { src: "src/assets/Castlevania.png", label: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL" },
+  { src: "src/assets/BlankAgain.png", label: "BLANK AGAIN VR" },
+  { src: "src/assets/Tanks.png", label: "TANKS TANKS TANKS" },
+  { src: "src/assets/UE5TPS.png", label: "UE5 THIRD PERSON SHOOTER" },
+  { src: "src/assets/Scene.jpg", label: "DMC 3 SCENE 1 REMAKE" },
 ];
 
 const CATS = ["ALL", "Multiplayer", "Open World", "Strategy", "Tool", "Puzzle", "Horror"];
@@ -199,7 +199,7 @@ function Nav() {
           background: `linear-gradient(135deg, ${C.red}, ${C.mag})`,
           clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
         }} />
-        <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 18, fontWeight: 700, color: C.text, letterSpacing: "0.12em" }}>ISAAC<span style={{ color: C.red }}>.</span>DEV</span>
+        <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 18, fontWeight: 700, color: C.text, letterSpacing: "0.12em" }}>MOHAB<span style={{ color: C.red }}>.</span>DEV</span>
       </div>
 
       {/* Links */}
@@ -900,7 +900,7 @@ function Footer() {
           background: `linear-gradient(135deg, ${C.red}, ${C.mag})`,
           clipPath: "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)",
         }} />
-        <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 14, fontWeight: 700, color: C.text, letterSpacing: "0.1em" }}>ISAAC<span style={{ color: C.red }}>.</span>DEV</span>
+        <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 14, fontWeight: 700, color: C.text, letterSpacing: "0.1em" }}>MOHAB<span style={{ color: C.red }}>.</span>DEV</span>
       </div>
       <span style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 11, color: C.muted, letterSpacing: "0.1em" }}>© 2025 · GAMEPLAY PROGRAMMER · BUILT IN REACT</span>
       <a href="#hero" style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 11, letterSpacing: "0.16em", color: C.muted, textDecoration: "none", transition: "color 0.2s" }}
