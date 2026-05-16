@@ -25,42 +25,42 @@ const PROJECTS = [
     id: 1, title: "JUJUTSU KAISEN TOP-DOWN FIGHTER", category: "Multiplayer", year: "2026",
     desc: "Mutlipayer Top-Down Fighter with focus on responsive Combat mechanics, fast-paced gameplay and fluid movement.",
     stack: ["UE5", "C++", "Listen Server"], accent: "#ff3d5a",
-    img: "src/assets/JJK.png",
+    img: "/src/assets/images/JJK.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=aYnFqYDNW9g", steam: "#" },
   },
   {
     id: 2, title: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL", category: "Hack & Slash", year: "2026",
     desc: "A fast-paced 3D hack-and-slash built in Unity. This project features fluid character movement, responsive combat mechanics, and a level design inspired by the gothic atmosphere and exploration-driven gameplay of the original title.",
     stack: ["Unity", "C#", "ProBuilder"], accent: "#00e5ff",
-    img: "src/assets/Castlevania.png",
+    img: "/src/assets/images/Castlevania.png",
     links: { github: "#", youtube: "#" },
   },
   {
     id: 3, title: "BLANK AGAIN VR", category: "VR", year: "2026",
     desc: "Mystery/Puzzle solving VR game made in Unreal Engine 5 for the Egypt Game Jam(1-Week). The game features interactable props, physics-based puzzles, key-door mechanics, and a suspenseful atmosphere.",
     stack: ["Unreal Engine 5", "C++"], accent: "#d926f0",
-    img: "src/assets/BlankAgain.png",
+    img: "/src/assets/images/BlankAgain.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=iqTLwZZMAKI" },
   },
   {
     id: 4, title: "TANKS TANKS TANKS", category: "Multiplayer", year: "2026",
     desc: "A fast paced multiplayer game made in Unity, where players control tanks and battle each other in 2 opposing teams. The game features rigidbody movement for a weighed feel, fluid animations and impactful VFX, class and ability systems",
     stack: ["Unity", "C#", "Netcode"], accent: "#7c3aed",
-    img: "src/assets/Tanks.png",
+    img: "/src/assets/images/Tanks.png",
     links: { github: "#" },
   },
   {
     id: 5, title: "UE5 THIRD PERSON SHOOTER", category: "Third Person", year: "2026",
     desc: "Third Person Shooter base made in Unreal Engine 5, featuring a locomotion system with 3 states(unarmed, pistol, rifle), a firing system, a health and consumables system, an interaction system and enemy AI turrets",
     stack: ["Unreal Engine 5", "C++"], accent: "#00e5ff",
-    img: "src/assets/UE5TPS.png",
+    img: "/src/assets/images/UE5TPS.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=bRkA1bfu5pU" },
   },
   {
     id: 6, title: "DMC 3 SCENE 1 REMAKE", category: "Cinematic", year: "2025",
     desc: "An attempt to remake the first scene from Devil May Cry 3 in Unreal Engine 5 to learn animation and sequencer basics.",
     stack: ["Unreal Engine 5", "Sequencer", "Blender"], accent: "#ff3d5a",
-    img: "src/assets/Scene.jpg",
+    img: "/src/assets/images/Scene.jpg",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=zaWelhRBzHM" },
   },
 ];
@@ -77,12 +77,12 @@ const STACK = [
 ];
 
 const MEDIA = [
-  { src: "src/assets/JJK.png", label: "JUJUTSU KAISEN TOP-DOWN FIGHTER" },
-  { src: "src/assets/Castlevania.png", label: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL" },
-  { src: "src/assets/BlankAgain.png", label: "BLANK AGAIN VR" },
-  { src: "src/assets/Tanks.png", label: "TANKS TANKS TANKS" },
-  { src: "src/assets/UE5TPS.png", label: "UE5 THIRD PERSON SHOOTER" },
-  { src: "src/assets/Scene.jpg", label: "DMC 3 SCENE 1 REMAKE" },
+  { src: "/src/assets/images/JJK.png", label: "JUJUTSU KAISEN TOP-DOWN FIGHTER" },
+  { src: "/src/assets/images/Castlevania.png", label: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL" },
+  { src: "/src/assets/images/BlankAgain.png", label: "BLANK AGAIN VR" },
+  { src: "/src/assets/images/Tanks.png", label: "TANKS TANKS TANKS" },
+  { src: "/src/assets/images/UE5TPS.png", label: "UE5 THIRD PERSON SHOOTER" },
+  { src: "/src/assets/images/Scene.jpg", label: "DMC 3 SCENE 1 REMAKE" },
 ];
 
 const CATS = ["ALL", "Multiplayer", "Open World", "Strategy", "Tool", "Puzzle", "Horror"];
@@ -502,10 +502,10 @@ function ProjectCard({ p }) {
 
         {/* Links */}
         <div style={{ display: "flex", gap: 14, paddingTop: 12, borderTop: `1px solid ${C.border}` }}>
-          {Object.entries(p.links).map(([type]) => {
+          {Object.entries(p.links).filter(([, url]) => url !== "#").map(([type, url]) => {
             const Icon = linkMap[type] || (() => null);
             return (
-              <a key={type} href="#" style={{
+              <a key={type} href={url} target="_blank" rel="noopener noreferrer" style={{
                 display: "flex", alignItems: "center", gap: 6,
                 fontFamily: "'Rajdhani', sans-serif", fontSize: 11, letterSpacing: "0.1em",
                 color: C.muted, textDecoration: "none", transition: "color 0.2s",
