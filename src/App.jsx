@@ -174,36 +174,65 @@ function CustomCursor() {
   const mouse = useRef({ x: -100, y: -100 });
   const ring = useRef({ x: -100, y: -100 });
   const hovering = useRef(false);
+  const clicking = useRef(false);
 
   useEffect(() => {
     const onMove = (e) => { mouse.current = { x: e.clientX, y: e.clientY }; };
+    const onDown = () => { clicking.current = true; };
+    const onUp   = () => { clicking.current = false; };
     const onEnter = () => { hovering.current = true; };
     const onLeave = () => { hovering.current = false; };
 
     window.addEventListener("mousemove", onMove);
-    document.querySelectorAll("a, button, [role=button]").forEach(el => {
-      el.addEventListener("mouseenter", onEnter);
-      el.addEventListener("mouseleave", onLeave);
-    });
+    window.addEventListener("mousedown", onDown);
+    window.addEventListener("mouseup", onUp);
+
+    // Re-attach hover listeners whenever DOM changes (handles dynamic elements)
+    const attachHover = () => {
+      document.querySelectorAll("a, button, [role=button]").forEach(el => {
+        el.removeEventListener("mouseenter", onEnter);
+        el.removeEventListener("mouseleave", onLeave);
+        el.addEventListener("mouseenter", onEnter);
+        el.addEventListener("mouseleave", onLeave);
+      });
+    };
+    attachHover();
+    const obs = new MutationObserver(attachHover);
+    obs.observe(document.body, { childList: true, subtree: true });
+
+    // Recover cursor position when mouse re-enters from iframe
+    const onWindowEnter = (e) => { mouse.current = { x: e.clientX, y: e.clientY }; };
+    window.addEventListener("mouseenter", onWindowEnter);
 
     let raf;
     const animate = () => {
-      ring.current.x += (mouse.current.x - ring.current.x) * 0.12;
-      ring.current.y += (mouse.current.y - ring.current.y) * 0.12;
+      // Faster lerp: 0.22 instead of 0.12
+      ring.current.x += (mouse.current.x - ring.current.x) * 0.22;
+      ring.current.y += (mouse.current.y - ring.current.y) * 0.22;
 
       if (dotRef.current) {
-        dotRef.current.style.transform = `translate(${mouse.current.x - 4}px, ${mouse.current.y - 4}px)`;
+        const s = clicking.current ? 0.6 : 1;
+        dotRef.current.style.transform = `translate(${mouse.current.x - 4}px, ${mouse.current.y - 4}px) scale(${s})`;
+        dotRef.current.style.background = clicking.current ? C.mag : C.red;
       }
       if (ringRef.current) {
-        const scale = hovering.current ? 1.8 : 1;
+        const scale = clicking.current ? 0.75 : hovering.current ? 1.8 : 1;
+        const color = clicking.current ? C.cyan : hovering.current ? C.mag : C.red;
         ringRef.current.style.transform = `translate(${ring.current.x - 18}px, ${ring.current.y - 18}px) scale(${scale})`;
-        ringRef.current.style.borderColor = hovering.current ? C.mag : C.red;
-        ringRef.current.style.boxShadow = `0 0 10px ${hovering.current ? C.mag : C.red}80`;
+        ringRef.current.style.borderColor = color;
+        ringRef.current.style.boxShadow = `0 0 ${clicking.current ? 18 : 10}px ${color}${clicking.current ? "cc" : "80"}`;
       }
       raf = requestAnimationFrame(animate);
     };
     animate();
-    return () => { cancelAnimationFrame(raf); window.removeEventListener("mousemove", onMove); };
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mousedown", onDown);
+      window.removeEventListener("mouseup", onUp);
+      window.removeEventListener("mouseenter", onWindowEnter);
+      obs.disconnect();
+    };
   }, []);
 
   return createPortal(
@@ -377,11 +406,13 @@ function Nav() {
           letterSpacing: "0.14em", color: C.text, textDecoration: "none",
           background: C.red, padding: "8px 18px",
           clipPath: "polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%)",
-          transition: "box-shadow 0.2s",
+          transition: "box-shadow 0.2s, transform 0.15s",
           boxShadow: `0 0 16px ${C.red}60`,
         }}
-          onMouseEnter={e => e.currentTarget.style.boxShadow = `0 0 28px ${C.red}`}
-          onMouseLeave={e => e.currentTarget.style.boxShadow = `0 0 16px ${C.red}60`}
+          onMouseEnter={e => { e.currentTarget.style.boxShadow = `0 0 32px ${C.red}, 0 0 60px ${C.red}40`; e.currentTarget.style.transform = "scale(1.05)"; }}
+          onMouseLeave={e => { e.currentTarget.style.boxShadow = `0 0 16px ${C.red}60`; e.currentTarget.style.transform = "scale(1)"; }}
+          onMouseDown={e => { e.currentTarget.style.transform = "scale(0.95)"; e.currentTarget.style.boxShadow = `0 0 8px ${C.red}40`; }}
+          onMouseUp={e => { e.currentTarget.style.transform = "scale(1.05)"; e.currentTarget.style.boxShadow = `0 0 32px ${C.red}`; }}
         >HIRE ME</a>
       </div>
     </nav>
@@ -505,20 +536,30 @@ function Hero() {
 
 function GXButton({ href, color, label, primary }) {
   const [hov, setHov] = useState(false);
+  const [pressed, setPressed] = useState(false);
   return (
     <a href={href}
       onMouseEnter={() => setHov(true)}
-      onMouseLeave={() => setHov(false)}
+      onMouseLeave={() => { setHov(false); setPressed(false); }}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
       style={{
         fontFamily: "'Rajdhani', sans-serif", fontWeight: 700,
         fontSize: 13, letterSpacing: "0.16em",
-        color: primary ? C.bg : color,
-        background: primary ? (hov ? C.mag : color) : "transparent",
-        border: `1px solid ${color}`,
+        color: primary ? C.bg : hov ? C.text : color,
+        background: primary
+          ? pressed ? color : hov ? C.mag : color
+          : hov ? `${color}20` : "transparent",
+        border: `1px solid ${hov ? color : color + "99"}`,
         padding: "12px 28px", textDecoration: "none",
         clipPath: "polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%)",
-        boxShadow: hov ? `0 0 24px ${color}80` : `0 0 8px ${color}30`,
-        transition: "all 0.25s",
+        boxShadow: pressed
+          ? `0 0 6px ${color}40`
+          : hov
+          ? `0 0 32px ${color}90, 0 0 64px ${color}30, inset 0 0 12px ${color}20`
+          : `0 0 8px ${color}30`,
+        transform: pressed ? "scale(0.96)" : hov ? "scale(1.03)" : "scale(1)",
+        transition: "all 0.18s ease",
         display: "inline-block",
       }}
     >{label}</a>
@@ -544,6 +585,31 @@ function HUDPanel() {
   );
 }
 
+function FilterBtn({ label, active, onClick }) {
+  const [hov, setHov] = useState(false);
+  const [pressed, setPressed] = useState(false);
+  return (
+    <button onClick={onClick}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => { setHov(false); setPressed(false); }}
+      onMouseDown={() => setPressed(true)}
+      onMouseUp={() => setPressed(false)}
+      style={{
+        fontFamily: "'Rajdhani', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em",
+        background: active ? C.red : hov ? `${C.red}18` : "transparent",
+        color: active ? C.bg : hov ? C.text : C.muted,
+        border: `1px solid ${active ? C.red : hov ? `${C.red}70` : C.border}`,
+        padding: "6px 16px", cursor: "pointer",
+        clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
+        boxShadow: active
+          ? `0 0 18px ${C.red}70, inset 0 0 8px ${C.red}20`
+          : hov ? `0 0 14px ${C.red}40` : "none",
+        transform: pressed ? "scale(0.94)" : "scale(1)",
+        transition: "all 0.18s ease",
+      }}>{label}</button>
+  );
+}
+
 // ── PROJECTS ─────────────────────────────────────────────────────────────────
 function Projects() {
   const [filter, setFilter] = useState("ALL");
@@ -555,18 +621,12 @@ function Projects() {
         <SectionHeader label="FEATURED PROJECTS" accent={C.red} />
         {/* Filters */}
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginTop: 32, marginBottom: 48 }}>
-          {CATS.map(c => (
-            <button key={c} onClick={() => setFilter(c)} style={{
-              fontFamily: "'Rajdhani', sans-serif", fontSize: 11, fontWeight: 700, letterSpacing: "0.18em",
-              background: filter === c ? C.red : "transparent",
-              color: filter === c ? C.bg : C.muted,
-              border: `1px solid ${filter === c ? C.red : C.border}`,
-              padding: "6px 16px", cursor: "pointer",
-              clipPath: "polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%)",
-              boxShadow: filter === c ? `0 0 14px ${C.red}60` : "none",
-              transition: "all 0.2s",
-            }}>{c}</button>
-          ))}
+          {CATS.map(c => {
+            const active = filter === c;
+            return (
+              <FilterBtn key={c} label={c} active={active} onClick={() => setFilter(c)} />
+            );
+          })}
         </div>
       </Reveal>
 
