@@ -34,7 +34,7 @@ const PROJECTS = [
     desc: "A fast-paced 3D hack-and-slash built in Unity. This project features fluid character movement, responsive combat mechanics, and a level design inspired by the gothic atmosphere and exploration-driven gameplay of the original title.",
     stack: ["Unity", "C#", "ProBuilder"], accent: "#00e5ff",
     img: "/Portfolio/images/Castlevania.png",
-    links: { github: "#", youtube: "#" },
+    links: { github: "#", youtube: "https://www.youtube.com/watch?v=6fvzcn4i5Sc" },
   },
   {
     id: 3, title: "BLANK AGAIN VR", category: "VR", year: "2026",
@@ -48,7 +48,7 @@ const PROJECTS = [
     desc: "A fast paced multiplayer game made in Unity, where players control tanks and battle each other in 2 opposing teams. The game features rigidbody movement for a weighed feel, fluid animations and impactful VFX, class and ability systems",
     stack: ["Unity", "C#", "Netcode"], accent: "#7c3aed",
     img: "/Portfolio/images/Tanks.png",
-    links: { github: "#" },
+    links: { github: "#", youtube: "https://www.youtube.com/watch?v=FSlgHSAZ2Ek" },
   },
   {
     id: 5, title: "UE5 THIRD PERSON SHOOTER", category: "Third Person", year: "2026",
@@ -179,7 +179,7 @@ function CustomCursor() {
   useEffect(() => {
     const onMove = (e) => { mouse.current = { x: e.clientX, y: e.clientY }; };
     const onDown = () => { clicking.current = true; };
-    const onUp   = () => { clicking.current = false; };
+    const onUp = () => { clicking.current = false; };
     const onEnter = () => { hovering.current = true; };
     const onLeave = () => { hovering.current = false; };
 
@@ -486,7 +486,7 @@ function Hero() {
         }}>
           <div style={{ width: 32, height: 2, background: C.red }} />
           <p style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: "clamp(14px, 2vw, 18px)", color: C.muted, letterSpacing: "0.12em", textTransform: "uppercase", margin: 0 }}>
-            Gameplay Programmer <span style={{ color: C.dim }}>·</span> Multiplayer Systems <span style={{ color: C.dim }}>·</span> UE5 / Unity
+            Game Developer <span style={{ color: C.dim }}>·</span> Gameplay Systems <span style={{ color: C.dim }}>·</span> UE5 / Unity
           </p>
         </div>
 
@@ -556,8 +556,8 @@ function GXButton({ href, color, label, primary }) {
         boxShadow: pressed
           ? `0 0 6px ${color}40`
           : hov
-          ? `0 0 32px ${color}90, 0 0 64px ${color}30, inset 0 0 12px ${color}20`
-          : `0 0 8px ${color}30`,
+            ? `0 0 32px ${color}90, 0 0 64px ${color}30, inset 0 0 12px ${color}20`
+            : `0 0 8px ${color}30`,
         transform: pressed ? "scale(0.96)" : hov ? "scale(1.03)" : "scale(1)",
         transition: "all 0.18s ease",
         display: "inline-block",
