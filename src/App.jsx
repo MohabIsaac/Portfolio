@@ -514,7 +514,7 @@ function Hero() {
           borderTop: `1px solid ${C.border}`,
           animation: "heroFade 0.9s 0.55s ease forwards", opacity: 0,
         }}>
-          {[["3+", "YRS EXP"], ["Unreal/Unity", "ENGINES"], ["C++ and C#", "LANGUAGES"]].map(([n, l]) => (
+          {[["3+", "YRS DEVELOPING"], ["Unreal/Unity", "ENGINES"], ["C++ and C#", "LANGUAGES"]].map(([n, l]) => (
             <div key={l}>
               <div style={{ fontFamily: "'Rajdhani', sans-serif", fontWeight: 700, fontSize: "clamp(22px, 4vw, 36px)", color: C.red, lineHeight: 1 }}>{n}</div>
               <div style={{ fontFamily: "'Rajdhani', sans-serif", fontSize: 10, letterSpacing: "0.18em", color: C.muted, marginTop: 4 }}>{l}</div>
