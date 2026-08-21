@@ -1101,7 +1101,7 @@ function Contact() {
             <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
               {[
                 { Icon: GithubIcon, label: "GITHUB", sub: "@MohabIsaac", color: C.text, href: "https://github.com/MohabIsaac" },
-                { Icon: LinkedinIcon, label: "LINKEDIN", sub: "in/MohabIsaac", color: "#0a66c2", href: "https://www.linkedin.com/in/mohab-atef-27284b218/" },
+                { Icon: LinkedinIcon, label: "LINKEDIN", sub: "in/MohabIsaac", color: "#0a66c2", href: "https://www.linkedin.com/in/mohab-atef-isaac/" },
                 { Icon: YoutubeIcon, label: "YOUTUBE", sub: "@Ozul", color: "#ff0000", href: "https://www.youtube.com/@ozul8772/videos" },
                 { Icon: DiscordIcon, label: "DISCORD", sub: "ozul1", color: C.violet, href: "#" },
               ].map(({ Icon, label, sub, color, glyph, href }) => (
