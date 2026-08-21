@@ -64,6 +64,13 @@ const PROJECTS = [
     img: "/Portfolio/images/Scene.jpg",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=zaWelhRBzHM" },
   },
+  {
+    id: 7, title: "Horizon Of Aten", category: "VR", year: "2026",
+    desc: "A Desktop VR game created in Unreal Engine about an archeologist from the future searching for treasures in an old Egyptian temple only to stumble upon an ancient artifact that transports him back in time.",
+    stack: ["Unreal Engine 5", "Blueprints", "C++", "Sequencer"], accent: "#ff9900ff",
+    img: "/Portfolio/images/Ancient.png",
+    links: { github: "#", youtube: "https://youtu.be/DzfZpQs4K4o" },
+  },
 ];
 
 const STACK = [
@@ -84,6 +91,7 @@ const MEDIA = [
   { src: "/Portfolio/images/Tanks.png", label: "TANKS TANKS TANKS" },
   { src: "/Portfolio/images/UE5TPS.png", label: "UE5 THIRD PERSON SHOOTER" },
   { src: "/Portfolio/images/Scene.jpg", label: "DMC 3 SCENE 1 REMAKE" },
+  { src: "/Portfolio/images/Ancient.png", label: "HORIZON OF ATEN" },
 ];
 
 const CATS = ["ALL", "Multiplayer", "Hack & Slash", "Third Person", "VR", "Cinematic"];
