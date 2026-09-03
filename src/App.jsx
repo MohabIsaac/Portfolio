@@ -24,7 +24,7 @@ const C = {
 const PROJECTS = [
   {
     id: 0, title: "SSSTAY DOWN", category: "Fighting", year: "2026",
-    desc: "A Stylish and fast paced beat 'em up set in a neon light filled cyberpunk city where you try to survive by beating the ruthless street gang members while being cool at it",
+    desc: "A Stylish and fast paced beat 'em up set in a neon-drenched cyberpunk city where you try to survive by beating the ruthless street gang members while being cool at it",
     stack: ["Unity", "C#"], accent: "#ff3d5a",
     img: "/Portfolio/images/SSSTAY_DOWN.png",
     links: { github: "#", youtube: "https://youtu.be/yNsEz_16X-Q?si=PCRNYjN24xqDadTW", steam: "#" },
