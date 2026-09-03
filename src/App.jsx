@@ -23,9 +23,16 @@ const C = {
 // ── DATA ─────────────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
+    id: 0, title: "SSSTAY DOWN", category: "Fighting", year: "2026",
+    desc: "A Stylish and fast paced beat 'em up set in a neon light filled cyberpunk city where you try to survive by beating the ruthless street gang members while being cool at it",
+    stack: ["UE5", "C++", "Listen Server"], accent: "#ff3d5a",
+    img: "/Portfolio/images/SSSTAY_DOWN.png",
+    links: { github: "#", youtube: "https://youtu.be/yNsEz_16X-Q?si=PCRNYjN24xqDadTW", steam: "#" },
+  },
+  {
     id: 1, title: "JUJUTSU KAISEN TOP-DOWN FIGHTER", category: "Multiplayer", year: "2026",
     desc: "Mutlipayer Top-Down Fighter with focus on responsive Combat mechanics, fast-paced gameplay and fluid movement.",
-    stack: ["UE5", "C++", "Listen Server"], accent: "#ff3d5a",
+    stack: ["UE5", "C++", "Listen Server"], accent: "#a83dffff",
     img: "/Portfolio/images/JJK.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=aYnFqYDNW9g", steam: "#" },
   },
