@@ -23,42 +23,42 @@ const C = {
 // ── DATA ─────────────────────────────────────────────────────────────────────
 const PROJECTS = [
   {
-    id: 0, title: "SSSTAY DOWN", category: "Fighting", year: "2026",
+    id: 0, title: "SSSTAY DOWN", category: ["Action", "Fighting"], year: "2026",
     desc: "A Stylish and fast paced beat 'em up set in a neon light filled cyberpunk city where you try to survive by beating the ruthless street gang members while being cool at it",
-    stack: ["UE5", "C++", "Listen Server"], accent: "#ff3d5a",
+    stack: ["Unity", "C#"], accent: "#ff3d5a",
     img: "/Portfolio/images/SSSTAY_DOWN.png",
     links: { github: "#", youtube: "https://youtu.be/yNsEz_16X-Q?si=PCRNYjN24xqDadTW", steam: "#" },
   },
   {
-    id: 1, title: "JUJUTSU KAISEN TOP-DOWN FIGHTER", category: "Multiplayer", year: "2026",
+    id: 1, title: "JUJUTSU KAISEN TOP-DOWN FIGHTER", category: ["Multiplayer", "Action", "Fighting"], year: "2026",
     desc: "Mutlipayer Top-Down Fighter with focus on responsive Combat mechanics, fast-paced gameplay and fluid movement.",
     stack: ["UE5", "C++", "Listen Server"], accent: "#a83dffff",
     img: "/Portfolio/images/JJK.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=aYnFqYDNW9g", steam: "#" },
   },
   {
-    id: 2, title: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL", category: "Hack & Slash", year: "2026",
+    id: 2, title: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL", category: ["Hack & Slash", "Action"], year: "2026",
     desc: "A fast-paced 3D hack-and-slash built in Unity. This project features fluid character movement, responsive combat mechanics, and a level design inspired by the gothic atmosphere and exploration-driven gameplay of the original title.",
-    stack: ["Unity", "C#", "ProBuilder"], accent: "#00e5ff",
+    stack: ["Unity", "C#"], accent: "#00e5ff",
     img: "/Portfolio/images/Castlevania.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=6fvzcn4i5Sc" },
   },
   {
-    id: 3, title: "BLANK AGAIN VR", category: "VR", year: "2026",
+    id: 3, title: "BLANK AGAIN VR", category: ["VR", "Puzzle"], year: "2026",
     desc: "Mystery/Puzzle solving VR game made in Unreal Engine 5 for the Egypt Game Jam(1-Week). The game features interactable props, physics-based puzzles, key-door mechanics, and a suspenseful atmosphere.",
     stack: ["Unreal Engine 5", "C++"], accent: "#d926f0",
     img: "/Portfolio/images/BlankAgain.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=iqTLwZZMAKI" },
   },
   {
-    id: 4, title: "TANKS TANKS TANKS", category: "Multiplayer", year: "2026",
+    id: 4, title: "TANKS TANKS TANKS", category: ["Multiplayer", "Action"], year: "2026",
     desc: "A fast paced multiplayer game made in Unity, where players control tanks and battle each other in 2 opposing teams. The game features rigidbody movement for a weighed feel, fluid animations and impactful VFX, class and ability systems",
     stack: ["Unity", "C#", "Netcode"], accent: "#7c3aed",
     img: "/Portfolio/images/Tanks.png",
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=FSlgHSAZ2Ek" },
   },
   {
-    id: 5, title: "UE5 THIRD PERSON SHOOTER", category: "Third Person", year: "2026",
+    id: 5, title: "UE5 THIRD PERSON SHOOTER", category: ["Shooter", "Third Person"], year: "2026",
     desc: "Third Person Shooter base made in Unreal Engine 5, featuring a locomotion system with 3 states(unarmed, pistol, rifle), a firing system, a health and consumables system, an interaction system and enemy AI turrets",
     stack: ["Unreal Engine 5", "C++"], accent: "#00e5ff",
     img: "/Portfolio/images/UE5TPS.png",
@@ -72,7 +72,7 @@ const PROJECTS = [
     links: { github: "#", youtube: "https://www.youtube.com/watch?v=zaWelhRBzHM" },
   },
   {
-    id: 7, title: "Horizon Of Aten", category: "VR", year: "2026",
+    id: 7, title: "Horizon Of Aten", category: ["VR", "Adventure", "Puzzle"], year: "2026",
     desc: "A Desktop VR game created in Unreal Engine about an archeologist from the future searching for treasures in an old Egyptian temple only to stumble upon an ancient artifact that transports him back in time.",
     stack: ["Unreal Engine 5", "Blueprints", "C++", "Sequencer"], accent: "#ff9900ff",
     img: "/Portfolio/images/Ancient.png",
@@ -102,7 +102,7 @@ const MEDIA = [
   { src: "/Portfolio/images/Ancient.png", label: "HORIZON OF ATEN" },
 ];
 
-const CATS = ["ALL", "Fighting", "Multiplayer", "Hack & Slash", "Third Person", "VR", "Cinematic"];
+const CATS = ["ALL", "Action", "Adventure", "Puzzle", "Fighting", "Shooter", "Multiplayer", "Hack & Slash", "Third Person", "VR", "Cinematic"];
 
 // ── HOOKS ────────────────────────────────────────────────────────────────────
 function useInView(threshold = 0.12) {
