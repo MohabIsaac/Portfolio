@@ -92,6 +92,7 @@ const STACK = [
 ];
 
 const MEDIA = [
+  { src: "/Portfolio/images/SSSTAY_DOWN.png", label: "SSSTAY DOWN" },
   { src: "/Portfolio/images/JJK.png", label: "JUJUTSU KAISEN TOP-DOWN FIGHTER" },
   { src: "/Portfolio/images/Castlevania.png", label: "CASTLEVANIA: DAWN OF SORROW INSPIRED LEVEL" },
   { src: "/Portfolio/images/BlankAgain.png", label: "BLANK AGAIN VR" },
@@ -101,7 +102,7 @@ const MEDIA = [
   { src: "/Portfolio/images/Ancient.png", label: "HORIZON OF ATEN" },
 ];
 
-const CATS = ["ALL", "Multiplayer", "Hack & Slash", "Third Person", "VR", "Cinematic"];
+const CATS = ["ALL", "Fighting", "Multiplayer", "Hack & Slash", "Third Person", "VR", "Cinematic"];
 
 // ── HOOKS ────────────────────────────────────────────────────────────────────
 function useInView(threshold = 0.12) {
